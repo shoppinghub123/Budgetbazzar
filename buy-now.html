@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Place Your Order</title>
+  <title>Place Your Order - Budget Bazzar</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -27,17 +27,25 @@
       margin-bottom: 20px;
       color: #555;
     }
-    .order-page a {
-      display: inline-block;
-      margin-top: 20px;
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
       background-color: #28a745;
       color: white;
       padding: 12px 24px;
       font-size: 18px;
-      text-decoration: none;
+      margin-top: 20px;
+      border: none;
       border-radius: 8px;
+      cursor: pointer;
     }
-    .order-page a:hover {
+    button:hover {
       background-color: #218838;
     }
   </style>
@@ -47,20 +55,44 @@
 
 <div class="order-page">
   <h1>Thank You for Choosing Budget Bazzar!</h1>
-  <p>We are excited to process your order for the Havells 500mm Pedestal Fan.</p>
-  <p>Please confirm your order details with us.</p>
+  <p>Fill the details below to place your order:</p>
 
-  <!-- Contact via Email -->
-  <a href="mailto:alokmistri69@gmail.com?subject=Order Confirmation: Havells 500mm Fan&body=Hello, I am confirming my order for the Havells 500mm Pedestal Fan. My address is: (Write here)">
-    📧 Confirm by Email
-  </a>
-
-  <!-- OR Contact via WhatsApp -->
-  <br><br>
-  <a href="https://wa.me/917439034248?text=I%20want%20to%20order%20the%20Havells%20500mm%20Pedestal%20Fan." style="background-color: #25D366;">
-    💬 Confirm via WhatsApp
-  </a>
+  <form id="orderForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input type="text" name="Name" id="name" placeholder="Your Name" required>
+    <input type="text" name="Address" id="address" placeholder="Full Address" required>
+    <input type="text" name="Landmark" id="landmark" placeholder="Nearest Landmark" required>
+    <input type="text" name="Whatsapp Number" id="whatsapp" placeholder="Your WhatsApp Number" required>
+    <button type="submit">Submit Order</button>
+  </form>
 </div>
+
+<script>
+  const form = document.getElementById('orderForm');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // stop normal form submit first
+
+    // Capture data
+    const name = document.getElementById('name').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const landmark = document.getElementById('landmark').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+
+    // Open WhatsApp
+    const whatsappMessage = `Hello, I want to order the Havells 500mm Pedestal Fan.%0A
+Name: ${name}%0A
+Address: ${address}%0A
+Landmark: ${landmark}%0A
+WhatsApp No: ${whatsapp}`;
+    
+    window.open(`https://wa.me/917439034248?text=${whatsappMessage}`, '_blank');
+
+    // Then actually submit form
+    setTimeout(() => {
+      form.submit();
+    }, 2000); // delay a little so WhatsApp window opens nicely
+  });
+</script>
 
 </body>
 </html>
