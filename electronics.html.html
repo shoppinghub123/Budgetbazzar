@@ -12,9 +12,48 @@
       text-align: center;
     }
 
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 150px;
+      height: auto;
+    }
+
     h1 {
       margin-bottom: 30px;
       color: #333;
+    }
+
+    .scroll-text {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      padding: 10px 0;
+      margin-bottom: 30px;
+      border-top: 2px solid #ccc;
+      border-bottom: 2px solid #ccc;
+    }
+
+    .scroll-text span {
+      display: inline-block;
+      padding-right: 100%;
+      animation: scroll-left 10s linear infinite;
+      color: blue;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
 
     .product-list {
@@ -54,17 +93,28 @@
 
 <body>
 
+  <!-- Logo Section -->
+  <div class="logo">
+    <img src="your-logo-folder/logo.png" alt="Budget Bazzar Logo">
+  </div>
+
+  <!-- Scrolling Updated Stock Text -->
+  <div class="scroll-text">
+    <span>🔵 Updated Stock Available Now | New Products Added | Grab Best Deals Today 🔵</span>
+  </div>
+
   <h1>Electronics Products</h1>
 
   <div class="product-list">
+    <div class="product">
+      <a href="havells-500mm-details.html">
+        <img src="Havells Wind storm 500mm 3 blade pedestal Fan.jpg" alt="Fan 1" style="cursor: pointer;">
+      </a>
+      <div class="product-name">Havells 500mm Pedestal Fan</div>
+      <div class="price">₹3300</div>
+    </div>
+    <!-- Add more products below in same format -->
+  </div>
 
-
-  <div class="product">
-  <a href="havells-500mm-details.html">
-    <img src="Havells Wind storm 500mm 3 blade pedestal Fan.jpg" alt="Fan 1" style="cursor: pointer;">
-  </a>
-  <div class="product-name">Havells 500mm Pedestal Fan</div>
-  <div class="price">₹3300</div>
-</div>
 </body>
 </html>
