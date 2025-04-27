@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+
+    .logo {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 150px;
+      height: auto;
+    }
+
+    .scroll-heading {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      background-color: #fff;
+      padding: 10px 0;
+      font-size: 24px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .scroll-heading span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 10s linear infinite;
+      color: blue;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .product {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      width: 200px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .product-name {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo Section -->
+  <div class="logo">
+    <img src="Logo (1).jpg" alt="Company Logo">
+    <img src="Logo (2).jpg" alt="Company Logo">
+  </div>
+
+  <!-- Scrolling Heading -->
+  <div class="scroll-heading">
+    <span>•Updated Product List • We Assure You To The Best Quality at The Low Prices • Delivery Available • Those Products Rate Are Without Delivery Charges•</span>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-list">
+    <div class="product">
+      <img src="Havells 500 mm padestal fan windstorm.jpg" alt="Havells Windstorm 500mm Padestal Fan">
+      <div class="product-name">HAVELLS Wind Storm 500 mm 3 Blade Pedestal Fan</div>
+       <div class="product-price" style="color: green; font-weight: bold;">₹3300</div>
+    </div>
+    <div class="product">
+      <img src="Havells windstorm 400 mm padestal fan.jpg" alt="Havells windstorm 400 mm padestal fan">
+      <div class="product-name">HAVELLS Wind Storm 400 mm 3 Blade Pedestal Fan</div>
+      <div class="product-price" style="color: green; font-weight: bold;">₹3000</div>
+    </div>
+  <div class="product">
+      <img src="Havells Effiencia neo.jpg" alt="Havells Efficiencia Neo">
+      <div class="product-name">Havells Efficiencia DX </div>
+       <div class="product-price" style="color: green; font-weight: bold;">₹2600</div>
+    </div>
+  <div class="product">
+      <img src="Havells Festiva 1200 mm.jpg" alt="Havells Festiva 1200mm">
+      <div class="product-name">HAVELLS Festiva 1200 mm 3 Blade Ceiling Fan</div>
+       <div class="product-price" style="color: green; font-weight: bold;">₹3100</div>
+    </div>
+   <div class="product">
+    <img src="Havells Fusion Prime.jpg" alt="Havells Fusion Prime">
+    <div class="product-name">Havells Fusion Prime</div>
+     <div class="product-price" style="color: green; font-weight: bold;">₹3100</div>
+  </div>
+   <div class="product">
+    <img src="Havells Quick air 1200 mm.jpg" alt="Havells Quick Air 1200mm">
+    <div class="product-name">Havells Quick Air (1200 mm)</div>
+    <div class="product-price" style="color: green; font-weight: bold;">₹2450</div>
+  </div>
+   <div class="product">
+    <img src="Havells Samrat.jpg" alt="Havells Samrat">
+    <div class="product-name">HAVELLS Samraat ES 1 Star 900 mm 3 Blade Ceiling Fan</div>
+     <div class="product-price" style="color: green; font-weight: bold;">₹2100</div>
+  </div>
+    <div class="product">
+    <img src="Havells ss 390.jpg" alt="Havells SS 390">
+    <div class="product-name">HAVELLS SS 390 ES 1200 mm 3 Blade Ceiling Fan</div>
+    <div class="product-price" style="color: green; font-weight: bold;">₹2350</div>
+  </div>
+
+  <!-- Product 9 -->
+  <div class="product">
+    <img src="Havells Thrill Air.jpg" alt="Havells Thrill Air">
+    <div class="product-name">HAVELLS Thrill Air ES 1200 mm 3 Blade Ceiling Fan</div>
+     <div class="product-price" style="color: green; font-weight: bold;">₹1999</div>
+  </div>
+  <div class="product">
+    <img src="Havells Ventill Air Dx.jpg" alt="Havells Ventil Air DX Exhaust Fan">
+    <div class="product-name">230mm FAN VENTIL AIR DSP CHOCO BROWN </div>
+     <div class="product-price" style="color: green; font-weight: bold;">₹1300</div>
+  </div>
+
+  <!-- Product 11 -->
+  <div class="product">
+    <img src="Havells Water Heater.jpg" alt="Havells Water Heater 3L">
+    <div class="product-name">Havells(3L)Instanio W/H</div>
+     <div class="product-price" style="color: green; font-weight: bold;">₹3550</div>
+  </div>
+
+  <!-- Product 12 -->
+  <div class="product">
+    <img src="Tisva led Light 2.jpg" alt="Tisva Inverter LED Bulb">
+    <div class="product-name">Tisva LED Bulb (Inverter Lamp)</div>
+  </div>
+
+  <!-- Product 13 -->
+  <div class="product">
+    <img src="Tisva LEd light.jpg" alt="Tisva LED Batten Light">
+    <div class="product-name">Tisva LED Batten Light</div>
+  </div>
+   <div class="product">
+    <img src="Usha Crisp Air vx.jpg" alt="Usha Crisp Air VX Exhaust Fan">
+    <div class="product-name">Usha Crisp Air VX (Exhaust Fan)</div>
+  </div>
+  <div class="product">
+    <img src="Usha racer (1).jpg" alt="Usha Racer">
+    <div class="product-name">USHA Racer Chrome 1200 mm 3 Blade Ceiling Fan</div>
+     <div class="product-price" style="color: green; font-weight: bold;">₹1950</div>
+  </div>
+   <div class="product">
+    <img src="HAVELLS 300 MM SWING WALL HS FAN OFF WHITE 3 Blade Wall Fan (Off White, Pack of 1) 300 mm 3 Blade Wall Fan.jpg" alt="Havells 300MM Swing Wall HS Fan" width="200px">
+    <h3>HAVELLS 300 MM SWING WALL HS FAN</h3>
+     <div class="product-price" style="color: green; font-weight: bold;">₹2400</div>
+</div>
+   <div class="product">
+    <img src="HAVELLS ACCELERO 400 mm 3 Blade Wall Fan.jpg" alt="Havells Accelero 400mm Wall Fan" width="200px">
+    <h3>Havells Accelero 400mm Wall Fan</h3>
+     <div class="product-price" style="color: green; font-weight: bold;">₹2,499</div>
+</div>
+   <div class="product">
+    <img src="Havells 230MM BRIDIE Personal Yellow Fan.jpg" alt="Havells 230MM BRIDIE Personal Yellow Fan" width="200px">
+    <h3>HAVELLS 230MM BRIDIE PERSONAL FAN</h3>
+     <div class="product-price" style="color: green; font-weight: bold;">₹1599</div>
+</div>
+   <div class="product">
+    <img src="HAVELLS Swing LX High Speed 400 mm 3 Blade Table Fan.jpg" alt="HAVELLS Swing LX High Speed 400 mm 3 Blade Table Fan" width="200px">
+    <h3>HAVELLS Swing LX High Speed Fan</h3>
+    <div class="product-price" style="color: green; font-weight: bold;">₹2,300</div>
+</div>
+  <div class="product">
+    <img src="HAVELLS Sprint-16 HS 400mm Pedestal Fan (White) 400 mm 3 Blade Pedestal Fan.jpg" alt="HAVELLS Sprint-16 HS 400mm Pedestal Fan (White)" width="200px">
+    <h3>HAVELLS Sprint-16 HS Pedestal Fan</h3>
+     <div class="product-price" style="color: green; font-weight: bold;">₹3400</div>
+</div>
+
+</body>
+</html>
+<section id="order-guide" style="padding: 40px; background: #f9f9f9;">
+  <h2 style="text-align: center; font-size: 32px; color: #333; margin-bottom: 40px;">
+    🛒 How to Place Your Order
+  </h2>
+
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+    <div style="background: white; width: 200px; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative;">
+      <div style="background: #007BFF; color: white; font-weight: bold; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; margin: 0 auto 10px;">1</div>
+      <h3 style="text-align: center;">Select Product</h3>
+      <p style="font-size: 14px; color: #555; text-align: center;">Browse and pick your item.</p>
+    </div>
+
+    <div style="background: white; width: 200px; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative;">
+      <div style="background: #007BFF; color: white; font-weight: bold; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; margin: 0 auto 10px;">2</div>
+      <h3 style="text-align: center;">Contact Us</h3>
+      <p style="font-size: 14px; color: #555; text-align: center;">WhatsApp, call, or email us.</p>
+    </div>
+
+    <div style="background: white; width: 200px; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative;">
+      <div style="background: #007BFF; color: white; font-weight: bold; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; margin: 0 auto 10px;">3</div>
+      <h3 style="text-align: center;">Confirm Order</h3>
+      <p style="font-size: 14px; color: #555; text-align: center;">Send address & payment info.</p>
+    </div>
+
+    <div style="background: white; width: 200px; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative;">
+      <div style="background: #007BFF; color: white; font-weight: bold; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; margin: 0 auto 10px;">4</div>
+      <h3 style="text-align: center;">Dispatch</h3>
+      <p style="font-size: 14px; color: #555; text-align: center;">We ship your order quickly.</p>
+    </div>
+
+    <div style="background: white; width: 200px; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative;">
+      <div style="background: #007BFF; color: white; font-weight: bold; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; margin: 0 auto 10px;">5</div>
+      <h3 style="text-align: center;">Delivery</h3>
+      <p style="font-size: 14px; color: #555; text-align: center;">Item reaches your doorstep.</p>
+    </div>
+  </div>
+</section>
+<section id="contact-section" style="padding: 40px; background-color: #eef2f7;">
+  <h2 style="text-align: center; font-size: 28px; margin-bottom: 30px;">📬 Send Us a Query</h2>
+
+  <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <label for="query" style="font-size: 16px; font-weight: bold;">Your Query:</label>
+    <textarea id="query" rows="5" placeholder="Write your question here..." style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;"></textarea>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="mailto:alokmistri69@gmail.com" style="text-decoration: none;">
+        <button style="background-color: #007BFF; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer;">
+          📧 Contact Us
+        </button>
+      </a>
+    </div>
+
+    <div style="margin-top: 30px; font-size: 15px; color: #333; text-align: center;">
+      <p><strong>Email:</strong> alokmistri69@gmail.com</p>
+      <p><strong>WhatsApp No:</strong> 7439034248</p>
+    </div>
+  </div>
+</section>
+<!-- Customer Review Section -->
+<section id="customer-reviews" style="padding: 40px; background-color: #f9f9f9;">
+  <h2 style="text-align: center; font-size: 32px; margin-bottom: 30px;">💬 Customer Reviews</h2>
+
+  <!-- Review Form -->
+  <div style="max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <form id="review-form">
+      <div style="margin-bottom: 20px;">
+        <label for="name" style="font-weight: bold;">Your Name:</label><br>
+        <input type="text" id="name" required style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border: 1px solid #ccc;">
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label for="product" style="font-weight: bold;">Product Name:</label><br>
+        <input type="text" id="product" required style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border: 1px solid #ccc;">
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label for="experience" style="font-weight: bold;">Your Experience:</label><br>
+        <textarea id="experience" rows="5" required style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+      </div>
+
+      <div style="text-align: center;">
+        <button type="submit" style="background-color: #28a745; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer;">
+          ✅ Submit Review
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Reviews Display -->
+  <div id="reviews-display" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+    <h3 style="text-align: center; margin-bottom: 20px;">📣 What Our Customers Say</h3>
+    <div id="review-list" style="display: flex; flex-direction: column; gap: 20px;"></div>
+  </div>
+</section>
+
+<!-- Script for Handling Reviews -->
+<script>
+  const reviewForm = document.getElementById("review-form");
+  const reviewList = document.getElementById("review-list");
+
+  reviewForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const product = document.getElementById("product").value.trim();
+    const experience = document.getElementById("experience").value.trim();
+
+    if (name && product && experience) {
+      const reviewItem = document.createElement("div");
+      reviewItem.style.background = "#ffffff";
+      reviewItem.style.padding = "20px";
+      reviewItem.style.borderRadius = "12px";
+      reviewItem.style.boxShadow = "0 0 10px rgba(0,0,0,0.05)";
+      reviewItem.innerHTML = `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Product:</strong> ${product}</p>
+        <p><strong>Experience:</strong><br>${experience}</p>
+      `;
+
+      reviewList.prepend(reviewItem); // adds newest review on top
+
+      reviewForm.reset();
+    } else {
+      alert("Please fill in all fields before submitting.");
+    }
+  });
+</script>
+<script>
+  const reviewForm = document.getElementById("review-form");
+  const reviewList = document.getElementById("review-list");
+
+  // Load reviews from localStorage on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    const storedReviews = JSON.parse(localStorage.getItem("customerReviews")) || [];
+    displayReviews(storedReviews);
+  });
+
+  reviewForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const product = document.getElementById("product").value.trim();
+    const experience = document.getElementById("experience").value.trim();
+
+    if (name && product && experience) {
+      const newReview = {
+        name: name,
+        product: product,
+        experience: experience,
+        time: new Date().toISOString()
+      };
+
+      let reviews = JSON.parse(localStorage.getItem("customerReviews")) || [];
+      reviews.unshift(newReview); // Add new review to the beginning
+      reviews = reviews.slice(0, 10); // Keep only latest 10 reviews
+
+      localStorage.setItem("customerReviews", JSON.stringify(reviews));
+
+      displayReviews(reviews);
+      reviewForm.reset();
+    } else {
+      alert("Please fill in all fields before submitting.");
+    }
+  });
+
+  function displayReviews(reviews) {
+    reviewList.innerHTML = "";
+    reviews.forEach(review => {
+      const reviewItem = document.createElement("div");
+      reviewItem.style.background = "#ffffff";
+      reviewItem.style.padding = "20px";
+      reviewItem.style.borderRadius = "12px";
+      reviewItem.style.boxShadow = "0 0 10px rgba(0,0,0,0.05)";
+      reviewItem.innerHTML = `
+        <p><strong>Name:</strong> ${review.name}</p>
+        <p><strong>Product:</strong> ${review.product}</p>
+        <p><strong>Experience:</strong><br>${review.experience}</p>
+      `;
+      reviewList.appendChild(reviewItem);
+    });
+  }
+</script>
+<div style="position: fixed; top: 100px; right: 20px; width: 300px; background: white; border: 2px solid #ccc; border-radius: 10px; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 9999;">
+    <img src="Photo.jpg" alt="wish You a happy Married Life" style="width: 100%; height: auto; border-radius: 8px;">
+    <h2 style="text-align: center; color: #333; margin-top: 10px;"> Wish You A Happy Married Life💍 (For Showing Your Ads Contact With us)</h2>
+</div>
+<div style="position: fixed; top: 100px; right: 20px; width: 300px; background: white; border: 2px solid #ccc; border-radius: 10px; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 9999;">
+    <div style="background: #ffcc00; color: black; text-align: center; padding: 5px; font-weight: bold; border-radius: 8px 8px 0 0; font-size: 8px;">
+        AD
+   
+
