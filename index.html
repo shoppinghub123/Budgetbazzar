@@ -2,51 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Budget Bazaar</title>
+  <title>Welcome to [Your Website Name]</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      background: #f9f9f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-image: url('Budgetbazzar Banner.png'); /* Your logo here */
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 800px; /* Adjust size */
+      background: url('Budgetbazzar Banner.png') no-repeat center center fixed;
+      background-size: cover;
       font-family: 'Arial', sans-serif;
-    }
-    .content {
-      text-align: center;
-      margin-top: 450px; /* Push buttons below the logo */
-    }
-    .button {
-      display: inline-block;
-      margin: 10px;
-      padding: 15px 30px;
-      font-size: 20px;
-      background-color: #00b894;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-      text-decoration: none;
+      text-align: center;
     }
-    .button:hover {
-      background-color: #00ff00;
+
+    .logo {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .website-name {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    }
+
+    .product-types {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 50px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+
+    .product-types ul {
+      list-style-type: lower-alpha;
+      font-size: 26px;
+      padding-left: 0;
+    }
+
+    .product-types ul li {
+      margin: 10px 0;
     }
   </style>
 </head>
+
 <body>
+
+  <img src="your-logo-folder/Budgetbazzar Logo.png" alt="Logo" class="logo">
+   <div class="product-types">
+    <ul>
+      <li><button onclick="alert('Electronics Category Clicked!')">Electronic</button></li>
+      <li><button onclick="alert('Crockery & Accessories Category Clicked!')">Crockery & Accessories</button></li>
+    </ul>
+  </div>
+
+  <div class="preview-button">
+    <button onclick="alert('Preview: Everything is Working Fine!')">Preview Now</button>
+  </div>
 
 </body>
 </html>
-<!-- Inside index.html -->
-<div class="content">
-  <a href="signin.html" class="button">Sign In</a>
-  <a href="signup.html" class="button">Sign Up</a>
-</div>
-
