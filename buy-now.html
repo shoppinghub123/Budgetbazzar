@@ -57,7 +57,7 @@
   <h1>Thank You for Choosing Budget Bazzar!</h1>
   <p>Fill the details below to place your order:</p>
 
-  <form id="orderForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <form id="orderForm">
     <input type="text" name="Name" id="name" placeholder="Your Name" required>
     <input type="text" name="Address" id="address" placeholder="Full Address" required>
     <input type="text" name="Landmark" id="landmark" placeholder="Nearest Landmark" required>
@@ -88,20 +88,16 @@ Name: ${name}%0A
 Address: ${address}%0A
 Landmark: ${landmark}%0A
 Pincode: ${pincode}%0A
-Referral Code: ${Referral Code}%0A
 WhatsApp No: ${whatsapp}`;
 
     if (referral !== "") {
       whatsappMessage += `%0AReferral Code: ${referral}`;
     }
     
-    // Open WhatsApp
+    // Open WhatsApp with filled message
     window.open(`https://wa.me/917439034248?text=${whatsappMessage}`, '_blank');
 
-    // Submit the form after 2 seconds
-    setTimeout(() => {
-      form.submit();
-    }, 2000);
+    // No need to submit form anymore if data is sent via WhatsApp
   });
 </script>
 
