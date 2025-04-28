@@ -17,6 +17,7 @@
       height: 100vh;
       color: white;
       text-align: center;
+      position: relative;
     }
 
     .logo {
@@ -47,19 +48,49 @@
     .product-types ul li {
       margin: 10px 0;
     }
+
+    /* Floating Refer and Earn Box */
+    .refer-earn-box {
+      position: fixed;
+      bottom: 30px;
+      right: 30px; /* Change to 'left: 30px;' if you want it on left */
+      background: #ffcc00;
+      color: #333;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .refer-earn-box:hover {
+      background: #ff9900;
+      color: white;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Logo Image (if you want you can add your logo here) -->
-  <!-- Example: <img src="Budgetbazzar Logo.png" alt="Logo" class="Budgetbazzar Logo"> -->
+<!-- Logo Image (if you want you can add your logo here) -->
+<!-- Example: <img src="Budgetbazzar Logo.png" alt="Logo" class="logo"> -->
 
-  <!-- Product Type Box -->
-  <!-- Product Type Box -->
- <div class="product-types">
+<!-- Product Type Box -->
+<div class="product-types">
   <ul>
     <li><a href="electronics.html" style="color: white; text-decoration: none;">Electronics</a></li>
     <li><a href="crockery.html" style="color: white; text-decoration: none;">Crockery Products</a></li>
   </ul>
 </div>
+
+<!-- Refer and Earn Floating Box -->
+<a href="refer-and-earn.html" class="refer-earn-box">
+  🎁 Refer and Earn
+</a>
+
+</body>
+</html>
