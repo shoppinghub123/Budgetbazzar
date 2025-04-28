@@ -39,28 +39,48 @@
       margin: 20px 0;
     }
 
-    .share-button {
+    form {
       margin-top: 20px;
-      background-color: #25D366;
-      color: white;
-      padding: 15px 30px;
-      font-size: 18px;
-      text-decoration: none;
-      border-radius: 8px;
-      display: inline-block;
-    }
-
-    .share-button:hover {
-      background-color: #1ebe5d;
-    }
-
-    .refer-details {
       text-align: left;
-      margin-top: 30px;
     }
 
-    .refer-details strong {
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
       color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .submit-button, .whatsapp-button {
+      width: 100%;
+      background-color: #28a745;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .submit-button:hover, .whatsapp-button:hover {
+      background-color: #218838;
+    }
+
+    .whatsapp-button {
+      background-color: #25D366;
     }
   </style>
 </head>
@@ -72,24 +92,41 @@
   <!-- Banner Image -->
   <div class="refer-banner">
     <img src="Reffer.jpg" alt="Refer and Earn Banner">
-    <!-- Make sure 'Reffer.jpg' is uploaded inside the same folder on GitHub! -->
   </div>
 
   <h1>Refer and Earn Rewards! 🎁</h1>
-  <p>Invite your friends to Budget Bazzar and earn exciting rewards!</p>
+  <p>Fill the details to refer your friend and earn cashback & gifts!</p>
 
-  <!-- Share Button -->
-  <a href="https://wa.me/?text=I%20recommend%20Budget%20Bazzar!%20Shop%20and%20save%20big!%20Visit:%20https://yourgithubsite.github.io/" class="share-button" target="_blank">
+  <!-- Referral Form -->
+  <form id="referralForm" action="https://formsubmit.co/alokmistri69@gmail.com" method="POST">
+    
+    <label for="who-referred">Who Referred (Your Name)</label>
+    <input type="text" id="who-referred" name="Who Referred" required>
+
+    <label for="whom-referred">Whom Referred (Friend's Name)</label>
+    <input type="text" id="whom-referred" name="Whom Referred" required>
+
+    <label for="whatsapp-number">Friend's WhatsApp Number</label>
+    <input type="text" id="whatsapp-number" name="Friend's WhatsApp Number" required>
+
+    <label for="address">Friend's Address</label>
+    <input type="text" id="address" name="Friend's Address" required>
+
+    <label for="landmark">Nearest Landmark</label>
+    <input type="text" id="landmark" name="Nearest Landmark" required>
+
+    <!-- FormSubmit Hidden Inputs -->
+    <input type="hidden" name="_subject" value="New Referral Submitted! 🎯">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+
+    <button type="submit" class="submit-button">📨 Submit to Budget Bazzar</button>
+  </form>
+
+  <!-- WhatsApp Share Button -->
+  <a href="https://wa.me/?text=I%20recommend%20Budget%20Bazzar!%20Shop%20and%20save%20big!%20Visit:%20https://yourgithubsite.github.io/" class="whatsapp-button" target="_blank">
     💬 Share on WhatsApp
   </a>
-
-  <!-- Referral Details Section -->
-  <div class="refer-details">
-    <h2>Referral Details:</h2>
-    <p><strong>Who Referred:</strong> (Your Name)</p>
-    <p><strong>Whom Referred:</strong> (Friend's Name)</p>
-    <p><em>Both receive cashback and free gifts after successful referrals! 🎉</em></p>
-  </div>
 
 </div>
 
