@@ -61,8 +61,9 @@
     <input type="text" name="Name" id="name" placeholder="Your Name" required>
     <input type="text" name="Address" id="address" placeholder="Full Address" required>
     <input type="text" name="Landmark" id="landmark" placeholder="Nearest Landmark" required>
-    <input type="text" name="Pincode" id="Pincode" placeholder="Pincode" required>
+    <input type="text" name="Pincode" id="pincode" placeholder="Pincode" required>
     <input type="text" name="Whatsapp Number" id="whatsapp" placeholder="Your WhatsApp Number" required>
+    <input type="text" name="Referral Code" id="referral" placeholder="Referral Code (Optional)">
     <button type="submit">Submit Order</button>
   </form>
 </div>
@@ -73,27 +74,34 @@
   form.addEventListener('submit', function(e) {
     e.preventDefault(); // stop normal form submit first
 
-    // Capture data
+    // Capture form data
     const name = document.getElementById('name').value.trim();
     const address = document.getElementById('address').value.trim();
-    const landmark = document.getElementById('Pincode').value.trim();
     const landmark = document.getElementById('landmark').value.trim();
+    const pincode = document.getElementById('pincode').value.trim();
     const whatsapp = document.getElementById('whatsapp').value.trim();
+    const referral = document.getElementById('referral').value.trim();
 
-    // Open WhatsApp
-    const whatsappMessage = `Hello, I want to order the Havells 500mm Pedestal Fan.%0A
+    // Create WhatsApp message
+    let whatsappMessage = `Hello, I want to order the Havells 500mm Pedestal Fan.%0A
 Name: ${name}%0A
 Address: ${address}%0A
 Landmark: ${landmark}%0A
 Pincode: ${pincode}%0A
+Referral Code: ${Referral Code}%0A
 WhatsApp No: ${whatsapp}`;
+
+    if (referral !== "") {
+      whatsappMessage += `%0AReferral Code: ${referral}`;
+    }
     
+    // Open WhatsApp
     window.open(`https://wa.me/917439034248?text=${whatsappMessage}`, '_blank');
 
-    // Then actually submit form
+    // Submit the form after 2 seconds
     setTimeout(() => {
       form.submit();
-    }, 2000); // delay a little so WhatsApp window opens nicely
+    }, 2000);
   });
 </script>
 
