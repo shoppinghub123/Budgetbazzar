@@ -61,6 +61,7 @@
     <input type="text" name="Name" id="name" placeholder="Your Name" required>
     <input type="text" name="Address" id="address" placeholder="Full Address" required>
     <input type="text" name="Landmark" id="landmark" placeholder="Nearest Landmark" required>
+    <input type="text" name="Pincode" id="Pincode" placeholder="Pincode" required>
     <input type="text" name="Whatsapp Number" id="whatsapp" placeholder="Your WhatsApp Number" required>
     <button type="submit">Submit Order</button>
   </form>
@@ -75,7 +76,7 @@
     // Capture data
     const name = document.getElementById('name').value.trim();
     const address = document.getElementById('address').value.trim();
-    const landmark = document.getElementById('Pin Code').value.trim();
+    const landmark = document.getElementById('Pincode').value.trim();
     const landmark = document.getElementById('landmark').value.trim();
     const whatsapp = document.getElementById('whatsapp').value.trim();
 
@@ -84,6 +85,7 @@
 Name: ${name}%0A
 Address: ${address}%0A
 Landmark: ${landmark}%0A
+Pincode: ${pincode}%0A
 WhatsApp No: ${whatsapp}`;
     
     window.open(`https://wa.me/917439034248?text=${whatsappMessage}`, '_blank');
