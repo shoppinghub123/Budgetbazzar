@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Details - Budget Bazzar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-images {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .product-images img {
+      width: 30%;
+      border-radius: 10px;
+    }
+
+    .product-name {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 22px;
+      color: green;
+      margin-bottom: 5px;
+    }
+
+    .stock {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    .buy-button {
+      background-color: #28a745;
+      color: white;
+      padding: 14px 26px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .buy-button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="product-images" id="image-gallery"></div>
+    <div class="product-name" id="product-name"></div>
+    <div class="price" id="product-price"></div>
+    <div class="stock" id="product-stock"></div>
+    <div class="description" id="product-description"></div>
+    <button class="buy-button" id="buyBtn">🛒 Buy Now on WhatsApp</button>
+  </div>
+
+  <script>
+    // Read query params
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("category");
+    const id = params.get("id");
+
+    const products = JSON.parse(localStorage.getItem(category)) || [];
+    const product = products.find(p => p.id === id);
+
+    if (product) {
+      // Fill images
+      const imageGallery = document.getElementById("image-gallery");
+      product.images.forEach(img => {
+        const imgEl = document.createElement("img");
+        imgEl.src = img;
+        imgEl.alt = product.name;
+        imageGallery.appendChild(imgEl);
+      });
+
+      document.getElementById("product-name").innerText = product.name;
+      document.getElementById("product-price").innerText = "₹" + product.price;
+      document.getElementById("product-stock").innerText = "Stock: " + product.stock;
+      document.getElementById("product-description").innerText = product.description;
+
+      // Buy button link to WhatsApp
+      document.getElementById("buyBtn").addEventListener("click", () => {
+        const message = `Hello, I want to buy:\n${product.name}\nPrice: ₹${product.price}\nCategory: ${category}`;
+        window.open(`https://wa.me/917439034248?text=${encodeURIComponent(message)}`, "_blank");
+      });
+    } else {
+      document.querySelector(".container").innerHTML = "<h2>Product not found</h2>";
+    }
+  </script>
+</body>
+</html>
