@@ -3,63 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <title>Welcome to Budget Bazzar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
       background: url('Budgetbazzar Logo.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      color: white;
+      text-align: center;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      color: white;
-      text-align: center;
-    }
-
-    .logo {
-      width: 200px;
-      margin-bottom: 20px;
+      padding: 20px;
     }
 
     .website-name {
-      font-size: 48px;
+      font-size: 42px;
       font-weight: bold;
-      margin-bottom: 30px;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      margin-bottom: 20px;
     }
 
     .product-types {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px 50px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px 40px;
       border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
 
     .product-types ul {
-      list-style-type: decimal;
-      font-size: 26px;
-      padding-left: 0;
+      list-style: none;
     }
 
     .product-types ul li {
-      margin: 10px 0;
+      margin: 15px 0;
+    }
+
+    .product-types a {
+      background-color: #2874f0;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 20px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .product-types a:hover {
+      background-color: #0a5ecb;
+    }
+
+    .bottom-banner {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .bottom-banner a {
+      font-size: 18px;
+      color: #00ffcc;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      animation: slide 10s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .refer-box {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #28a745;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .refer-box:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .product-types a {
+        font-size: 18px;
+        padding: 10px 20px;
+      }
+
+      .website-name {
+        font-size: 32px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Logo Image (if you want you can add your logo here) -->
-  <!-- Example: <img src="Budgetbazzar Logo.png" alt="Logo" class="Budgetbazzar Logo"> -->
+  <!-- Refer & Earn Button -->
+  <a href="refer-and-earn.html" class="refer-box">🎁 Refer & Earn</a>
 
-  <!-- Product Type Box -->
-  <!-- Product Type Box -->
- <div class="product-types">
-  <ul>
-    <li><a href="electronics.html" style="color: white; text-decoration: none;">Electronics</a></li>
-    <li><a href="crockery.html" style="color: white; text-decoration: none;">Crockery Products</a></li>
-  </ul>
+  <!-- Website Title -->
+  <div class="website-name">Welcome to Budget Bazzar</div>
+
+  <!-- Product Type Section -->
+  <div class="product-types">
+    <ul>
+      <li><a href="electronics.html">Electronics</a></li>
+      <li><a href="Chrocet.html">Other Products</a></li>
+    </ul>
+  </div>
+
+  <!-- Moving Contact Banner -->
+  <div class="bottom-banner">
+    <a href="mailto:alokmistri69@gmail.com?subject=Listing%20Products%20Inquiry">
+      📩 Listing Your Products? Contact With Us Now!
+    </a>
+  </div>
+
+</body>
+</html>
+<!-- Authentication Buttons or Greeting -->
+<div id="auth-area" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+  <!-- JavaScript will control what appears here -->
 </div>
+
+<script>
+  const authArea = document.getElementById("auth-area");
+  const userName = localStorage.getItem("loggedInUser");
+
+  if (userName) {
+    // User is signed in
+    authArea.innerHTML = `
+      <span style="color: white; font-weight: bold; margin-right: 15px;">Welcome, ${userName}</span>
+      <button onclick="logout()" style="background: red; color: white; padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer;">Logout</button>
+    `;
+  } else {
+    // User not signed in
+    authArea.innerHTML = `
+      <a href="signin.html" style="background: #fff; color: #2874f0; padding: 8px 14px; text-decoration: none; font-weight: bold; border-radius: 6px; margin-right: 10px; border: 2px solid #2874f0;">Sign In</a>
+      <a href="signup.html" style="background: #2874f0; color: white; padding: 8px 14px; text-decoration: none; font-weight: bold; border-radius: 6px;">Sign Up</a>
+    `;
+  }
+
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    alert("You have been logged out.");
+    window.location.href = "signin.html";
+  }
+</script>
+
