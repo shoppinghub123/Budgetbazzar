@@ -2,46 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Login - Budget Bazzar</title>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <title>Admin Panel - Budget Bazzar</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f2f5;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
     }
 
-    .login-box {
+    .login-box, .admin-panel {
       background: white;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.2);
-      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
       width: 320px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
     }
 
     input {
-      padding: 10px;
       width: 100%;
-      margin-top: 12px;
+      padding: 12px;
+      margin-top: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 16px;
     }
 
     button {
+      margin-top: 15px;
       padding: 10px 20px;
-      margin-top: 20px;
-      width: 100%;
       background-color: #2874f0;
-      border: none;
       color: white;
-      font-size: 16px;
-      font-weight: bold;
+      border: none;
       border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
     }
 
@@ -49,69 +52,41 @@
       background-color: #0a5ecb;
     }
 
-    #admin-panel {
+    .admin-panel {
       display: none;
-      margin-top: 20px;
     }
   </style>
 </head>
 
 <body>
-  <div class="login-box">
-    <h2>Admin Login</h2>
-    <form id="sendPasswordForm">
-      <input type="email" id="adminEmail" value="alokmistri69@gmail.com" readonly />
-      <button type="submit">Send Admin Password</button>
-    </form>
 
-    <form id="verifyForm" style="margin-top: 20px;">
-      <input type="text" id="enteredPassword" placeholder="Enter Received Password" required />
-      <button type="submit">Verify</button>
-    </form>
+  <!-- Login Prompt -->
+  <div class="login-box" id="login-box">
+    <h2>Admin Access</h2>
+    <input type="password" id="adminPassword" placeholder="Enter Admin Password" />
+    <button onclick="checkPassword()">Access Panel</button>
+  </div>
 
-    <div id="admin-panel">
-      <h3>✅ Access Granted</h3>
-      <p>Welcome to the admin control panel.</p>
-      <!-- Add your upload tools here -->
-    </div>
+  <!-- Admin Panel -->
+  <div class="admin-panel" id="admin-panel">
+    <h2>Welcome Admin</h2>
+    <p>You can now upload products or manage the site.</p>
+    <!-- Future upload tools go here -->
   </div>
 
   <script>
-    emailjs.init("lZwWccc8yQE0QmMOh"); // Replace with your EmailJS public key
+    function checkPassword() {
+      const input = document.getElementById("adminPassword").value;
+      const correctPassword = "123@alokmistri";
 
-    let generatedPassword = "";
-
-    // Send email with new random password
-    document.getElementById("sendPasswordForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      generatedPassword = Math.floor(100000 + Math.random() * 900000).toString();
-
-      const templateParams = {
-        to_name: "Admin",
-        to_email: "alokmistri69@gmail.com",
-        message: `Your one-time admin password is: ${generatedPassword}`,
-      };
-
-      emailjs.send("service_4f96zpk", "template_diq6oeb", templateParams)
-        .then(function(response) {
-          alert("Password has been sent to your Gmail.");
-        }, function(error) {
-          alert("Failed to send email. Check your EmailJS setup.");
-          console.error(error);
-        });
-    });
-
-    // Verify the entered password
-    document.getElementById("verifyForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const inputPass = document.getElementById("enteredPassword").value.trim();
-      if (inputPass === generatedPassword) {
+      if (input === correctPassword) {
+        document.getElementById("login-box").style.display = "none";
         document.getElementById("admin-panel").style.display = "block";
       } else {
-        alert("❌ Incorrect Password");
+        alert("❌ Incorrect password. Please try again.");
       }
-    });
+    }
   </script>
+
 </body>
 </html>
