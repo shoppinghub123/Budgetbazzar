@@ -49,6 +49,13 @@
       background-color: #218838;
     }
   </style>
+  <script>
+    // 🔐 Restriction: Must be logged in to view this page
+    if (!localStorage.getItem("loggedInUser")) {
+      alert("You must be signed in to place an order.");
+      window.location.href = "signin.html";
+    }
+  </script>
 </head>
 
 <body>
@@ -72,9 +79,8 @@
   const form = document.getElementById('orderForm');
 
   form.addEventListener('submit', function(e) {
-    e.preventDefault(); // stop normal form submit first
+    e.preventDefault();
 
-    // Capture form data
     const name = document.getElementById('name').value.trim();
     const address = document.getElementById('address').value.trim();
     const landmark = document.getElementById('landmark').value.trim();
@@ -82,7 +88,6 @@
     const whatsapp = document.getElementById('whatsapp').value.trim();
     const referral = document.getElementById('referral').value.trim();
 
-    // Create WhatsApp message
     let whatsappMessage = `Hello, I want to order the Havells 500mm Pedestal Fan.%0A
 Name: ${name}%0A
 Address: ${address}%0A
@@ -93,11 +98,8 @@ WhatsApp No: ${whatsapp}`;
     if (referral !== "") {
       whatsappMessage += `%0AReferral Code: ${referral}`;
     }
-    
-    // Open WhatsApp with filled message
-    window.open(`https://wa.me/917439034248?text=${whatsappMessage}`, '_blank');
 
-    // No need to submit form anymore if data is sent via WhatsApp
+    window.open(`https://wa.me/917439034248?text=${whatsappMessage}`, '_blank');
   });
 </script>
 
