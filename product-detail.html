@@ -1,8 +1,124 @@
-<div class="product">
-  <a href="product-detail.html?category=Electronics&id=Havells 400mmwindstorm padestal fan" style="text-decoration: none; color: inherit;">
-    <img src="mm1.jpeg" alt="Havells 400mmwindstorm padestal fan" />
-    <div class="product-name">Havells 400mmwindstorm padestal fan</div>
-    <div class="price">₹3000</div>
-    <div class="stock">Stock: 5</div>
-  </a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Details - Budget Bazzar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .product-images img {
+      width: 30%;
+      border-radius: 10px;
+    }
+
+    .product-name {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 22px;
+      color: green;
+      margin-bottom: 5px;
+    }
+
+    .stock {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    .buy-button {
+      background-color: #28a745;
+      color: white;
+      padding: 14px 26px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .buy-button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="Havells 500mm(2).jpg" id="image-gallery"></div>
+    <div class="Havells500mm" id="product-name"></div>
+    <div class="3100" id="product-price"></div>
+    <div class="3" id="product-stock"></div>
+    <div class="Havells500mm" id="product-description"></div>
+    <button class="buy-button" id="buyBtn">🛒 Buy Now</button>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("category");
+    const id = params.get("id");
+
+    const products = JSON.parse(localStorage.getItem(category)) || [];
+    const product = products.find(p => p.id === id);
+
+    if (product) {
+      // Load images
+      const gallery = document.getElementById("image-gallery");
+      product.images.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = product.name;
+        gallery.appendChild(img);
+      });
+
+      // Load product info
+      document.getElementById("product-name").textContent = product.name;
+      document.getElementById("product-price").textContent = "₹" + product.price;
+      document.getElementById("product-stock").textContent = "Stock: " + product.stock;
+      document.getElementById("product-description").textContent = product.description;
+
+      // WhatsApp Buy link
+      document.getElementById("buyBtn").addEventListener("click", () => {
+        const message = `Hello, I want to buy:\nProduct: ${product.name}\nPrice: ₹${product.price}`;
+        window.open(`https://wa.me/917439034248?text=${encodeURIComponent(message)}`, "_blank");
+      });
+
+    } else {
+      document.querySelector(".container").innerHTML = "<h2>❌ Product not found</h2>";
+    }
+  </script>
+</body>
+</html>
