@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login - Budget Bazzar</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 320px;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      margin-top: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      width: 100%;
+      background-color: #2874f0;
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0a5ecb;
+    }
+
+    #admin-panel {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-box">
+    <h2>Admin Login</h2>
+    <form id="sendPasswordForm">
+      <input type="email" id="adminEmail" value="alokmistri69@gmail.com" readonly />
+      <button type="submit">Send Admin Password</button>
+    </form>
+
+    <form id="verifyForm" style="margin-top: 20px;">
+      <input type="text" id="enteredPassword" placeholder="Enter Received Password" required />
+      <button type="submit">Verify</button>
+    </form>
+
+    <div id="admin-panel">
+      <h3>✅ Access Granted</h3>
+      <p>Welcome to the admin control panel.</p>
+      <!-- Add your upload tools here -->
+    </div>
+  </div>
+
+  <script>
+    emailjs.init("lZwWccc8yQE0QmMOh"); // Replace with your EmailJS public key
+
+    let generatedPassword = "";
+
+    // Send email with new random password
+    document.getElementById("sendPasswordForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      generatedPassword = Math.floor(100000 + Math.random() * 900000).toString();
+
+      const templateParams = {
+        to_name: "Admin",
+        to_email: "alokmistri69@gmail.com",
+        message: `Your one-time admin password is: ${generatedPassword}`,
+      };
+
+      emailjs.send("service_4f96zpk", "template_diq6oeb", templateParams)
+        .then(function(response) {
+          alert("Password has been sent to your Gmail.");
+        }, function(error) {
+          alert("Failed to send email. Check your EmailJS setup.");
+          console.error(error);
+        });
+    });
+
+    // Verify the entered password
+    document.getElementById("verifyForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const inputPass = document.getElementById("enteredPassword").value.trim();
+      if (inputPass === generatedPassword) {
+        document.getElementById("admin-panel").style.display = "block";
+      } else {
+        alert("❌ Incorrect Password");
+      }
+    });
+  </script>
+</body>
+</html>
