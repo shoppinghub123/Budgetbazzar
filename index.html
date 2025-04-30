@@ -3,92 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <title>Welcome to Budget Bazzar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      background: url('Budgetbazzar Logo.png') no-repeat center center fixed;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: url('Budgetbazzar logo.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       height: 100vh;
       color: white;
       text-align: center;
       position: relative;
-    }
-
-    .logo {
-      width: 200px;
-      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
     .website-name {
-      font-size: 48px;
+      font-size: 42px;
       font-weight: bold;
-      margin-bottom: 30px;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      margin-bottom: 20px;
     }
 
     .product-types {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px 50px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px 40px;
       border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
 
     .product-types ul {
-      list-style-type: decimal;
-      font-size: 26px;
-      padding-left: 0;
+      list-style: none;
     }
 
     .product-types ul li {
-      margin: 10px 0;
+      margin: 15px 0;
     }
 
-    /* Bottom Line Contact Section */
+    .product-types a {
+      background-color: #2874f0;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 20px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .product-types a:hover {
+      background-color: #0a5ecb;
+    }
+
     .bottom-banner {
       position: absolute;
       bottom: 10px;
       width: 100%;
-      text-align: center;
       overflow: hidden;
+      text-align: center;
     }
 
     .bottom-banner a {
-      display: inline-block;
-      font-size: 22px;
-      color: #00ff00;
-      text-decoration: none;
-      animation: moveText 8s linear infinite;
+      font-size: 18px;
+      color: #00ffcc;
       font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      animation: slide 10s linear infinite;
+      white-space: nowrap;
     }
 
-    @keyframes moveText {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
+    @keyframes slide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
-    /* Refer & Earn Box */
     .refer-box {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
       background-color: #28a745;
       color: white;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-size: 18px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 16px;
       font-weight: bold;
       text-decoration: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
       transition: background-color 0.3s, transform 0.3s;
     }
 
@@ -96,26 +105,40 @@
       background-color: #218838;
       transform: scale(1.05);
     }
+
+    @media (max-width: 600px) {
+      .product-types a {
+        font-size: 18px;
+        padding: 10px 20px;
+      }
+
+      .website-name {
+        font-size: 32px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Refer and Earn Button -->
+  <!-- Refer & Earn Button -->
   <a href="refer-and-earn.html" class="refer-box">🎁 Refer & Earn</a>
 
-  <!-- Product Type Box -->
+  <!-- Website Title -->
+  <div class="website-name">Welcome to Budget Bazzar</div>
+
+  <!-- Product Type Section -->
   <div class="product-types">
     <ul>
-      <li><a href="electronics.html" style="color: white; text-decoration: none;">Electronics</a></li>
-      <li><a href="Chrocet.html" style="color: white; text-decoration: none;">Other Products</a></li>
+      <li><a href="electronics.html">Electronics</a></li>
+      <li><a href="Chrocet.html">Other Products</a></li>
     </ul>
   </div>
 
-  <!-- Bottom Banner Moving Contact -->
+  <!-- Moving Contact Banner -->
   <div class="bottom-banner">
     <a href="mailto:alokmistri69@gmail.com?subject=Listing%20Products%20Inquiry">
-      Listing Your Products Contact With Us
+      📩 Listing Your Products? Contact With Us Now!
     </a>
   </div>
 
