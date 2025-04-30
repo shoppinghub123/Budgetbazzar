@@ -144,3 +144,33 @@
 
 </body>
 </html>
+<!-- Authentication Buttons or Greeting -->
+<div id="auth-area" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+  <!-- JavaScript will control what appears here -->
+</div>
+
+<script>
+  const authArea = document.getElementById("auth-area");
+  const userName = localStorage.getItem("loggedInUser");
+
+  if (userName) {
+    // User is signed in
+    authArea.innerHTML = `
+      <span style="color: white; font-weight: bold; margin-right: 15px;">Welcome, ${userName}</span>
+      <button onclick="logout()" style="background: red; color: white; padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer;">Logout</button>
+    `;
+  } else {
+    // User not signed in
+    authArea.innerHTML = `
+      <a href="signin.html" style="background: #fff; color: #2874f0; padding: 8px 14px; text-decoration: none; font-weight: bold; border-radius: 6px; margin-right: 10px; border: 2px solid #2874f0;">Sign In</a>
+      <a href="signup.html" style="background: #2874f0; color: white; padding: 8px 14px; text-decoration: none; font-weight: bold; border-radius: 6px;">Sign Up</a>
+    `;
+  }
+
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    alert("You have been logged out.");
+    window.location.href = "signin.html";
+  }
+</script>
+
