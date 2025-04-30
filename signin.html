@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In - Budget Bazzar</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .signin-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .signin-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2874f0;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .extra-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .extra-links a {
+      text-decoration: none;
+      color: #2874f0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signin-box">
+    <h2>Sign In</h2>
+    <form id="signinForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Sign In</button>
+    </form>
+    <div class="extra-links">
+      <a href="#" onclick="forgotPassword()">Forgot Password?</a><br />
+      <a href="signup.html">Create Account</a>
+    </div>
+  </div>
+
+  <script>
+    // Replace these with your actual EmailJS credentials:
+    const EMAILJS_PUBLIC_KEY = "lZwWccc8yQE0QmMOh";
+    const EMAILJS_SERVICE_ID = "service_4f96zpk";
+    const EMAILJS_TEMPLATE_ID = "template_0yl9b9s";
+
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    document.getElementById("signinForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      const savedUser = JSON.parse(localStorage.getItem("budgetUser"));
+
+      if (!savedUser || savedUser.email !== email) {
+        alert("No account found. Please sign up first.");
+        return;
+      }
+
+      if (savedUser.password !== password) {
+        alert("Incorrect password.");
+        return;
+      }
+
+      localStorage.setItem("loggedInUser", savedUser.name);
+      alert("Login successful!");
+      window.location.href = "index.html";
+    });
+
+    function forgotPassword() {
+      const email = prompt("Enter your registered email:");
+      const savedUser = JSON.parse(localStorage.getItem("budgetUser"));
+
+      if (!savedUser || savedUser.email !== email) {
+        alert("Email not found.");
+        return;
+      }
+
+      const message = `Your password is: ${savedUser.password}`;
+      const to_name = savedUser.name;
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        message: message,
+        to_name: to_name,
+        to_email: email
+      }).then(() => {
+        alert("Password sent to your email.");
+      }).catch((error) => {
+        alert("Failed to send email. Please check your setup.");
+        console.error(error);
+      });
+    }
+  </script>
+
+</body>
+</html>
