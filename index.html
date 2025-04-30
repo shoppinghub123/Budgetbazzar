@@ -17,6 +17,7 @@
       height: 100vh;
       color: white;
       text-align: center;
+      position: relative;
     }
 
     .logo {
@@ -47,19 +48,76 @@
     .product-types ul li {
       margin: 10px 0;
     }
+
+    /* Bottom Line Contact Section */
+    .bottom-banner {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .bottom-banner a {
+      display: inline-block;
+      font-size: 22px;
+      color: #00ff00;
+      text-decoration: none;
+      animation: moveText 8s linear infinite;
+      font-weight: bold;
+    }
+
+    @keyframes moveText {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Refer & Earn Box */
+    .refer-box {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #28a745;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .refer-box:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Logo Image (if you want you can add your logo here) -->
-  <!-- Example: <img src="Budgetbazzar Logo.png" alt="Logo" class="Budgetbazzar Logo"> -->
+  <!-- Refer and Earn Button -->
+  <a href="refer-and-earn.html" class="refer-box">🎁 Refer & Earn</a>
 
   <!-- Product Type Box -->
-  <!-- Product Type Box -->
- <div class="product-types">
-  <ul>
-    <li><a href="electronics.html" style="color: white; text-decoration: none;">Electronics</a></li>
-    <li><a href="crockery.html" style="color: white; text-decoration: none;">Crockery Products</a></li>
-  </ul>
-</div>
+  <div class="product-types">
+    <ul>
+      <li><a href="electronics.html" style="color: white; text-decoration: none;">Electronics</a></li>
+      <li><a href="Chrocet.html" style="color: white; text-decoration: none;">Other Products</a></li>
+    </ul>
+  </div>
+
+  <!-- Bottom Banner Moving Contact -->
+  <div class="bottom-banner">
+    <a href="mailto:alokmistri69@gmail.com?subject=Listing%20Products%20Inquiry">
+      Listing Your Products Contact With Us
+    </a>
+  </div>
+
+</body>
+</html>
