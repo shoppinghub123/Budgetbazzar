@@ -1,167 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Other Products - Budget Bazzar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f1f3f6;
       margin: 0;
       padding: 20px;
-      text-align: center;
-    }
-
-    .logo {
-      margin-bottom: 20px;
-    }
-
-    .logo img {
-      width: 150px;
-      height: auto;
     }
 
     h1 {
+      color: #2c3e50;
+      text-align: center;
       margin-bottom: 30px;
-      color: #333;
-    }
-
-    .scroll-text {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      background-color: #ffffff;
-      padding: 10px 0;
-      margin-bottom: 30px;
-      border-top: 2px solid #ccc;
-      border-bottom: 2px solid #ccc;
-    }
-
-    .scroll-text span {
-      display: inline-block;
-      padding-right: 100%;
-      animation: scroll-left 10s linear infinite;
-      color: blue;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
     }
 
     .product-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .product {
-      background: white;
-      padding: 20px;
-      width: 220px;
+    .product-card {
+      background: #fff;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
       transition: transform 0.2s;
+      cursor: pointer;
+      text-align: center;
+      padding: 15px;
     }
 
-    .product:hover {
-      transform: scale(1.05);
+    .product-card:hover {
+      transform: scale(1.02);
     }
 
-    .product img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
+    .product-card img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 5px;
     }
 
     .product-name {
-      margin-top: 10px;
       font-weight: bold;
+      font-size: 16px;
+      margin: 10px 0 5px;
+      color: #333;
     }
 
-    .price {
-      margin-top: 5px;
+    .product-price {
       color: green;
       font-weight: bold;
     }
 
-    .fixed-ad {
-      position: fixed;
-      top: 150px;
-      right: 20px;
-      width: 250px;
-      background: white;
-      border: 2px solid #ccc;
-      border-radius: 12px;
-      padding: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      text-align: center;
-      z-index: 9999;
-    }
-
-    .fixed-ad .ad-label {
-      background: yellow;
-      color: black;
-      font-weight: bold;
-      padding: 5px;
-      border-radius: 8px 8px 0 0;
-      font-size: 16px;
-    }
-
-    .fixed-ad img {
-      width: 100%;
-      height: auto;
+    .out-of-stock {
+      color: red;
+      font-size: 14px;
       margin-top: 5px;
-      border-radius: 0 0 8px 8px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Logo Section -->
-  <div class="logo">
-    <img src="Budgetbazzar Logo.png" alt="Budget Bazzar Logo">
-  </div>
-
-  <!-- Scrolling Banner -->
-  <div class="scroll-text">
-    <span>🔵 Updated Other Products | Check Out Our Latest Stock 🔵</span>
-  </div>
-
   <h1>Other Products</h1>
 
-  <!-- Product Grid -->
-  <div class="product-list" id="product-list"></div>
+  <div class="product-list" id="productList"></div>
 
-  <!-- Fixed Ad Section -->
-  <div class="fixed-ad">
-    <div class="ad-label">AD</div>
-    <img src="ads/other-banner.jpg" alt="Ad">
-  </div>
-
-  <!-- Load Products from localStorage -->
   <script>
-    const productList = document.getElementById('product-list');
-    const products = JSON.parse(localStorage.getItem("Crockery")) || [];
+    const productList = document.getElementById("productList");
+    const otherProducts = JSON.parse(localStorage.getItem("Other Products")) || [];
 
-    if (products.length === 0) {
-      productList.innerHTML = "<p style='color: red;'>No products available in this category yet.</p>";
+    if (otherProducts.length === 0) {
+      productList.innerHTML = "<p style='text-align:center;color:#777;'>No products found in this category.</p>";
     } else {
-      products.forEach(product => {
-        const productCard = document.createElement("div");
-        productCard.className = "product";
-        productCard.innerHTML = `
-          <a href="product-details.html?id=${product.id}">
-            <img src="${Reffer.jpg[0]}" alt="${product.name}">
-          </a>
-          <div class="Reffer">${product.name}</div>
-          <div class="58">₹${product.price}</div>
+      otherProducts.forEach((product, index) => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.onclick = () => {
+          localStorage.setItem("selectedProduct", JSON.stringify(product));
+          window.location.href = "product-details.html?id=" + index;
+        };
+
+        card.innerHTML = `
+          <img src="${product.images[0]}" alt="${product.name}" />
+          <div class="product-name">${product.name}</div>
+          <div class="product-price">₹${product.price}</div>
+          ${product.stock == 0 ? "<div class='out-of-stock'>Out of Stock</div>" : ""}
         `;
-        productList.appendChild(productCard);
+
+        productList.appendChild(card);
       });
     }
   </script>
