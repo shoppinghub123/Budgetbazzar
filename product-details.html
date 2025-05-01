@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Details - Budget Bazzar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+
+    .product-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .product-container h2 {
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: green;
+      font-weight: bold;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .stock {
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .images img {
+      width: 180px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .back-link, .buy-now {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link {
+      background: #007BFF;
+      color: white;
+    }
+
+    .buy-now {
+      background: #28a745;
+      color: white;
+    }
+
+    .back-link:hover {
+      background-color: #0056b3;
+    }
+
+    .buy-now:hover {
+      background-color: #1e7e34;
+    }
+  </style>
+</head>
+<body>
+
+<div class="product-container" id="product-details">
+  <!-- Content will be loaded dynamically -->
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
+
+  // Fallback mock data if localStorage is not set yet
+  const mockProduct = {
+    id: "product-1",
+    name: "Ceiling Fan",
+    price: "3200",
+    stock: "2",
+    images: [
+      "https://via.placeholder.com/200x200?text=Fan+Front",
+      "https://via.placeholder.com/200x200?text=Fan+Side",
+      "https://via.placeholder.com/200x200?text=Fan+Top"
+    ]
+  };
+
+  function getAllProducts() {
+    const categories = ["Electronics", "Crockery"];
+    let all = [];
+    categories.forEach(cat => {
+      const items = JSON.parse(localStorage.getItem(cat)) || [];
+      all = all.concat(items);
+    });
+    return all.length ? all : [mockProduct]; // Use mock data if empty
+  }
+
+  function displayProduct(product) {
+    const container = document.getElementById("product-details");
+    container.innerHTML = `
+      <h2>${product.name}</h2>
+      <div class="price">Price: ₹${product.price}</div>
+      <div class="stock">Stock Available: ${product.stock}</div>
+      <div class="images">
+        ${product.images.map(src => `<img src="${src}" alt="${product.name}">`).join("")}
+      </div>
+      <a href="index.html" class="back-link">← Back to Home</a>
+      <a href="buy-now.html?product=${product.id}" class="buy-now">Buy Now</a>
+    `;
+  }
+
+  const allProducts = getAllProducts();
+  const found = allProducts.find(p => p.id === productId);
+
+  if (found) {
+    displayProduct(found);
+  } else {
+    document.getElementById("product-details").innerHTML = `<p style="color:red;">Product not found!</p>`;
+  }
+</script>
+
+</body>
+</html>
