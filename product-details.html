@@ -2,138 +2,151 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Product Details - Budget Bazzar</title>
+  <title>Add Product Details - Budget Bazzar</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f9f9f9;
-      text-align: center;
+      background: #f2f2f2;
+      padding: 30px;
     }
 
-    .product-container {
-      max-width: 800px;
+    .container {
+      max-width: 700px;
       margin: auto;
       background: white;
       padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .product-container h2 {
-      margin-bottom: 10px;
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
     }
 
-    .price {
-      color: green;
+    label {
       font-weight: bold;
-      font-size: 22px;
-      margin-bottom: 10px;
+      display: block;
+      margin-top: 20px;
     }
 
-    .stock {
-      margin-bottom: 15px;
-      color: #555;
-    }
-
-    .images {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .images img {
-      width: 180px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .back-link, .buy-now {
-      display: inline-block;
-      padding: 10px 20px;
-      margin: 10px;
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
       border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
+      border: 1px solid #ccc;
+      font-size: 16px;
     }
 
-    .back-link {
-      background: #007BFF;
+    button {
+      margin-top: 30px;
+      padding: 12px 20px;
+      background-color: #2874f0;
       color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
-    .buy-now {
-      background: #28a745;
-      color: white;
-    }
-
-    .back-link:hover {
-      background-color: #0056b3;
-    }
-
-    .buy-now:hover {
-      background-color: #1e7e34;
+    .preview-img {
+      margin-top: 10px;
+      max-width: 150px;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2>🔧 Add Product Details</h2>
 
-<div class="product-container" id="product-details">
-  <!-- Content will be loaded dynamically -->
-</div>
+    <label>Select Category</label>
+    <select id="category">
+      <option value="">-- Select Category --</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Other Products">Other Products</option>
+    </select>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const productId = params.get("id");
+    <label>Enter Product Name</label>
+    <input type="text" id="productName" placeholder="Exact product name" />
 
-  // Fallback mock data if localStorage is not set yet
-  const mockProduct = {
-    id: "product-1",
-    name: "Ceiling Fan",
-    price: "3200",
-    stock: "2",
-    images: [
-      "https://via.placeholder.com/200x200?text=Fan+Front",
-      "https://via.placeholder.com/200x200?text=Fan+Side",
-      "https://via.placeholder.com/200x200?text=Fan+Top"
-    ]
-  };
+    <button onclick="findProduct()">🔍 Find Product</button>
 
-  function getAllProducts() {
-    const categories = ["Electronics", "Crockery"];
-    let all = [];
-    categories.forEach(cat => {
-      const items = JSON.parse(localStorage.getItem(cat)) || [];
-      all = all.concat(items);
-    });
-    return all.length ? all : [mockProduct]; // Use mock data if empty
-  }
+    <div id="productInfo" style="display:none; margin-top: 30px;">
+      <h3 id="prodName"></h3>
+      <img id="mainImage" class="preview-img" alt="Main Image">
+      <p><strong>Price:</strong> ₹<span id="prodPrice"></span></p>
 
-  function displayProduct(product) {
-    const container = document.getElementById("product-details");
-    container.innerHTML = `
-      <h2>${celling fan}</h2>
-      <div class="price">Price: ₹${3200}</div>
-      <div class="stock">Stock Available: ${2}</div>
-      <div class="images">
-        ${product.images.map(src => `<img src="${src}" alt="${product.name}">`).join("")}
-      </div>
-      <a href="index.html" class="back-link">← Back to Home</a>
-      <a href="buy-now.html?product=${product.id}" class="buy-now">Buy Now</a>
-    `;
-  }
+      <label>Add 3 More Images</label>
+      <input type="file" id="moreImages" accept="image/*" multiple>
 
-  const allProducts = getAllProducts();
-  const found = allProducts.find(p => p.id === productId);
+      <label>New Stock</label>
+      <input type="number" id="stock">
 
-  if (found) {
-    displayProduct(found);
-  } else {
-    document.getElementById("product-details").innerHTML = `<p style="color:red;">Product not found!</p>`;
-  }
-</script>
+      <label>New Price</label>
+      <input type="number" id="price">
 
+      <label>Product Description</label>
+      <textarea id="description" rows="5"></textarea>
+
+      <button onclick="updateProduct()">✅ Save Changes</button>
+    </div>
+  </div>
+
+  <script>
+    let selectedProduct = null;
+    let selectedCategory = "";
+
+    function findProduct() {
+      const name = document.getElementById("productName").value.trim();
+      selectedCategory = document.getElementById("category").value;
+      const data = JSON.parse(localStorage.getItem(selectedCategory)) || [];
+
+      const found = data.find(p => p.name === name);
+      if (found) {
+        selectedProduct = found;
+        document.getElementById("prodName").textContent = found.name;
+        document.getElementById("prodPrice").textContent = found.price;
+        document.getElementById("mainImage").src = found.images[0] || "";
+        document.getElementById("productInfo").style.display = "block";
+      } else {
+        alert("❌ Product not found in selected category.");
+        document.getElementById("productInfo").style.display = "none";
+      }
+    }
+
+    function updateProduct() {
+      const stock = document.getElementById("stock").value;
+      const price = document.getElementById("price").value;
+      const description = document.getElementById("description").value;
+      const moreImages = document.getElementById("moreImages").files;
+
+      const readerPromises = Array.from(moreImages).slice(0, 3).map(file => {
+        return new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(file);
+        });
+      });
+
+      Promise.all(readerPromises).then(images => {
+        if (stock) selectedProduct.stock = stock;
+        if (price) selectedProduct.price = price;
+        if (description) selectedProduct.description = description;
+        if (!selectedProduct.images) selectedProduct.images = [];
+        selectedProduct.images = [...selectedProduct.images, ...images];
+
+        // Update LocalStorage
+        const products = JSON.parse(localStorage.getItem(selectedCategory)) || [];
+        const index = products.findIndex(p => p.name === selectedProduct.name);
+        if (index !== -1) {
+          products[index] = selectedProduct;
+          localStorage.setItem(selectedCategory, JSON.stringify(products));
+          alert("✅ Product details updated successfully.");
+        }
+      });
+    }
+  </script>
 </body>
 </html>
