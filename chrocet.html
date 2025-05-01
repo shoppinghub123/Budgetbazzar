@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Other Products - Budget Bazzar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 150px;
+      height: auto;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .scroll-text {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      background-color: #ffffff;
+      padding: 10px 0;
+      margin-bottom: 30px;
+      border-top: 2px solid #ccc;
+      border-bottom: 2px solid #ccc;
+    }
+
+    .scroll-text span {
+      display: inline-block;
+      padding-right: 100%;
+      animation: scroll-left 10s linear infinite;
+      color: blue;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+      padding: 20px;
+      width: 220px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .product-name {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .price {
+      margin-top: 5px;
+      color: green;
+      font-weight: bold;
+    }
+
+    .fixed-ad {
+      position: fixed;
+      top: 150px;
+      right: 20px;
+      width: 250px;
+      background: white;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-align: center;
+      z-index: 9999;
+    }
+
+    .fixed-ad .ad-label {
+      background: yellow;
+      color: black;
+      font-weight: bold;
+      padding: 5px;
+      border-radius: 8px 8px 0 0;
+      font-size: 16px;
+    }
+
+    .fixed-ad img {
+      width: 100%;
+      height: auto;
+      margin-top: 5px;
+      border-radius: 0 0 8px 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo Section -->
+  <div class="logo">
+    <img src="Budgetbazzar Logo.png" alt="Budget Bazzar Logo">
+  </div>
+
+  <!-- Scrolling Banner -->
+  <div class="scroll-text">
+    <span>🔵 Updated Other Products | Check Out Our Latest Stock 🔵</span>
+  </div>
+
+  <h1>Other Products</h1>
+
+  <!-- Product Grid -->
+  <div class="product-list" id="product-list"></div>
+
+  <!-- Fixed Ad Section -->
+  <div class="fixed-ad">
+    <div class="ad-label">AD</div>
+    <img src="ads/other-banner.jpg" alt="Ad">
+  </div>
+
+  <!-- Load Products from localStorage -->
+  <script>
+    const productList = document.getElementById('product-list');
+    const products = JSON.parse(localStorage.getItem("Crockery")) || [];
+
+    if (products.length === 0) {
+      productList.innerHTML = "<p style='color: red;'>No products available in this category yet.</p>";
+    } else {
+      products.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.className = "product";
+        productCard.innerHTML = `
+          <a href="product-details.html?id=${product.id}">
+            <img src="${product.images[0]}" alt="${product.name}">
+          </a>
+          <div class="product-name">${product.name}</div>
+          <div class="price">₹${product.price}</div>
+        `;
+        productList.appendChild(productCard);
+      });
+    }
+  </script>
+
+</body>
+</html>
