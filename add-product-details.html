@@ -1,167 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Product Details - Budget Bazzar</title>
+  <meta charset="UTF-8">
+  <title>Add Product Details - Budget Bazzar</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      margin: 0;
+      background: #f2f2f2;
       padding: 30px;
-      text-align: center;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 700px;
       margin: auto;
       background: white;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    h1 {
-      margin-bottom: 10px;
+    h2 {
+      text-align: center;
       color: #333;
+      margin-bottom: 30px;
     }
 
-    .price {
-      font-size: 24px;
-      color: green;
-      margin: 10px 0;
-    }
-
-    .stock {
+    label {
       font-weight: bold;
-      color: #444;
-    }
-
-    .images {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin: 20px 0;
-    }
-
-    .images img {
-      width: 150px;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-    }
-
-    .section {
+      display: block;
       margin-top: 20px;
-      text-align: left;
     }
 
-    .section h3 {
-      margin-bottom: 5px;
-      color: #2874f0;
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
     }
 
-    .section p {
-      color: #444;
-      line-height: 1.5;
-    }
-
-    .buy-button {
+    button {
       margin-top: 30px;
-      background-color: #28a745;
+      padding: 12px 20px;
+      background-color: #2874f0;
       color: white;
-      padding: 12px 24px;
+      font-size: 16px;
       border: none;
-      font-size: 18px;
       border-radius: 8px;
       cursor: pointer;
     }
 
-    .buy-button:hover {
-      background-color: #218838;
+    .preview-img {
+      margin-top: 10px;
+      max-width: 150px;
     }
   </style>
 </head>
-
 <body>
   <div class="container">
-    <h1 id="productName">Loading...</h1>
-    <div class="price" id="productPrice"></div>
-    <div class="stock" id="productStock"></div>
+    <h2>🔧 Add Product Details</h2>
 
-    <div class="images" id="productImages"></div>
+    <label>Select Category</label>
+    <select id="category">
+      <option value="">-- Select Category --</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Other Products">Other Products</option>
+    </select>
 
-    <div class="section">
-      <h3>Description</h3>
-      <p id="productDescription">-</p>
+    <label>Enter Product Name</label>
+    <input type="text" id="productName" placeholder="Exact product name" />
+
+    <button onclick="findProduct()">🔍 Find Product</button>
+
+    <div id="productInfo" style="display:none; margin-top: 30px;">
+      <h3 id="prodName"></h3>
+      <img id="mainImage" class="preview-img" alt="Main Image">
+      <p><strong>Price:</strong> ₹<span id="prodPrice"></span></p>
+
+      <label>Add 3 More Images</label>
+      <input type="file" id="moreImages" accept="image/*" multiple>
+
+      <label>New Stock</label>
+      <input type="number" id="stock">
+
+      <label>New Price</label>
+      <input type="number" id="price">
+
+      <label>Product Description</label>
+      <textarea id="description" rows="5"></textarea>
+
+      <button onclick="updateProduct()">✅ Save Changes</button>
     </div>
-
-    <div class="section">
-      <h3>Product Details</h3>
-      <p id="productDetails">-</p>
-    </div>
-
-    <div class="section">
-      <h3>Available Colours</h3>
-      <p id="productColor">-</p>
-    </div>
-
-    <button class="buy-button" onclick="placeOrder()">🛒 Buy Now</button>
   </div>
 
   <script>
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
+    let selectedProduct = null;
+    let selectedCategory = "";
+
+    function findProduct() {
+      const name = document.getElementById("productName").value.trim();
+      selectedCategory = document.getElementById("category").value;
+      const data = JSON.parse(localStorage.getItem(selectedCategory)) || [];
+
+      const found = data.find(p => p.name === name);
+      if (found) {
+        selectedProduct = found;
+        document.getElementById("prodName").textContent = found.name;
+        document.getElementById("prodPrice").textContent = found.price;
+        document.getElementById("mainImage").src = found.images[0] || "";
+        document.getElementById("productInfo").style.display = "block";
+      } else {
+        alert("❌ Product not found in selected category.");
+        document.getElementById("productInfo").style.display = "none";
+      }
     }
 
-    function loadProductDetails() {
-      const productId = getQueryParam("id");
-      if (!productId) {
-        alert("No product ID provided.");
-        return;
-      }
+    function updateProduct() {
+      const stock = document.getElementById("stock").value;
+      const price = document.getElementById("price").value;
+      const description = document.getElementById("description").value;
+      const moreImages = document.getElementById("moreImages").files;
 
-      const categories = ["Electronics", "Chrocet"];
-      let foundProduct = null;
+      const readerPromises = Array.from(moreImages).slice(0, 3).map(file => {
+        return new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(file);
+        });
+      });
 
-      for (const cat of categories) {
-        const products = JSON.parse(localStorage.getItem(cat)) || [];
-        const match = products.find(p => p.id === productId);
-        if (match) {
-          foundProduct = match;
-          break;
+      Promise.all(readerPromises).then(images => {
+        if (stock) selectedProduct.stock = stock;
+        if (price) selectedProduct.price = price;
+        if (description) selectedProduct.description = description;
+        if (!selectedProduct.images) selectedProduct.images = [];
+        selectedProduct.images = [...selectedProduct.images, ...images];
+
+        // Update LocalStorage
+        const products = JSON.parse(localStorage.getItem(selectedCategory)) || [];
+        const index = products.findIndex(p => p.name === selectedProduct.name);
+        if (index !== -1) {
+          products[index] = selectedProduct;
+          localStorage.setItem(selectedCategory, JSON.stringify(products));
+          alert("✅ Product details updated successfully.");
         }
-      }
-
-      if (!foundProduct) {
-        document.getElementById("productName").innerText = "Product Not Found!";
-        return;
-      }
-
-      document.getElementById("productName").innerText = foundProduct.name;
-      document.getElementById("productPrice").innerText = "₹" + foundProduct.price;
-      document.getElementById("productStock").innerText = "In Stock: " + foundProduct.stock;
-      document.getElementById("productDescription").innerText = foundProduct.description || "No description available.";
-      document.getElementById("productDetails").innerText = foundProduct.details || "No extra details.";
-      document.getElementById("productColor").innerText = foundProduct.color || "No color listed.";
-
-      const imageContainer = document.getElementById("productImages");
-      imageContainer.innerHTML = "";
-      (foundProduct.images || []).forEach(url => {
-        const img = document.createElement("img");
-        img.src = url;
-        imageContainer.appendChild(img);
       });
     }
-
-    function placeOrder() {
-      alert("You will be redirected to place your order.");
-      window.location.href = "buy-now.html";
-    }
-
-    loadProductDetails();
   </script>
 </body>
 </html>
