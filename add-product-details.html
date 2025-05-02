@@ -6,19 +6,19 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: #f5f5f5;
       margin: 0;
       padding: 20px;
       text-align: center;
     }
 
-    .container {
+    .product-detail {
       background: white;
-      max-width: 800px;
-      margin: 30px auto;
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .main-image img {
@@ -29,31 +29,29 @@
     .other-images {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin: 20px 0;
+      gap: 15px;
+      margin-top: 20px;
     }
 
     .other-images img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 6px;
+      width: 100px;
+      border-radius: 8px;
       border: 1px solid #ccc;
       cursor: pointer;
     }
 
-    .details {
+    .product-info {
+      margin-top: 30px;
       text-align: left;
-      margin-top: 20px;
+      padding: 0 30px;
     }
 
-    .details h2 {
+    .product-info h2 {
       margin-bottom: 10px;
-      font-size: 24px;
     }
 
-    .details p {
-      margin: 5px 0;
+    .product-info p {
+      margin-bottom: 8px;
     }
 
     .buy-now {
@@ -67,7 +65,7 @@
       font-size: 18px;
       text-decoration: none;
       border-radius: 8px;
-      transition: 0.3s;
+      transition: background-color 0.3s;
     }
 
     .buy-now a:hover {
@@ -75,43 +73,52 @@
     }
   </style>
 </head>
+
 <body>
 
-  <div class="container" id="productDetails">
-    <!-- Dynamic Product Content Loads Here -->
-  </div>
+<div class="product-detail" id="productContainer">
+  <p>Loading product details...</p>
+</div>
 
-  <script>
-    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+<script>
+  // Get product ID from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = parseInt(urlParams.get("id"));
 
-    if (!product) {
-      document.getElementById("productDetails").innerHTML = "<h2>No product found!</h2>";
-    } else {
-      const container = document.getElementById("productDetails");
-      const mainImage = product.images[0] || "";
-      const imageList = product.images.slice(0, 3).map(img => `<img src="${img}" onclick="document.getElementById('mainImg').src='${img}'" alt="Product">`).join("");
+  // Load product from LocalStorage
+  const allProducts = JSON.parse(localStorage.getItem("Other Products")) || [];
+  const product = allProducts[productId - 1]; // Because ID = index + 1
 
-      container.innerHTML = `
-        <div class="main-image">
-          <img id="mainImg" src="${mainImage}" alt="${product.name}">
-        </div>
+  if (product) {
+    const container = document.getElementById("productContainer");
+    container.innerHTML = `
+      <div class="main-image">
+        <img id="mainImage" src="${product.images[0]}" alt="${product.name}">
+      </div>
 
-        <div class="other-images">${imageList}</div>
+      <div class="other-images">
+        ${product.images.map(img => `<img src="${img}" onclick="changeImage('${img}')" />`).join('')}
+      </div>
 
-        <div class="details">
-          <h2>${product.name}</h2>
-          <p><strong>Price:</strong> ₹${product.price}</p>
-          <p><strong>Stock:</strong> ${product.stock}</p>
-          <p><strong>Category:</strong> ${product.category}</p>
-          <p><strong>Description:</strong> ${product.description}</p>
-        </div>
+      <div class="product-info">
+        <h2>${product.name}</h2>
+        <p><strong>Price:</strong> ₹${product.price}</p>
+        <p><strong>In Stock:</strong> ${product.stock}</p>
+        <p><strong>Description:</strong><br>${product.description}</p>
 
         <div class="buy-now">
-          <a href="buy-now.html" target="_blank">🛒 Buy Now</a>
+          <a href="buy-now.html?product=${encodeURIComponent(product.name)}" target="_blank">🛒 Buy Now</a>
         </div>
-      `;
-    }
-  </script>
+      </div>
+    `;
+  } else {
+    document.getElementById("productContainer").innerHTML = `<p style="color:red;">❌ Product not found. Make sure the ID is correct.</p>`;
+  }
+
+  function changeImage(imgPath) {
+    document.getElementById("mainImage").src = imgPath;
+  }
+</script>
 
 </body>
 </html>
