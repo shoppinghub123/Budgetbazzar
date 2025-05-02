@@ -1,152 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Add Product Details - Budget Bazzar</title>
+  <meta charset="UTF-8" />
+  <title>Product Details - Budget Bazzar</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      padding: 30px;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
     }
 
     .container {
-      max-width: 700px;
-      margin: auto;
       background: white;
+      max-width: 800px;
+      margin: 30px auto;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 30px;
+    .main-image img {
+      width: 300px;
+      border-radius: 8px;
     }
 
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 20px;
+    .other-images {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
     }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
+    .other-images img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
       border-radius: 6px;
       border: 1px solid #ccc;
-      font-size: 16px;
-    }
-
-    button {
-      margin-top: 30px;
-      padding: 12px 20px;
-      background-color: #2874f0;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
       cursor: pointer;
     }
 
-    .preview-img {
-      margin-top: 10px;
-      max-width: 150px;
+    .details {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .details h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .details p {
+      margin: 5px 0;
+    }
+
+    .buy-now {
+      margin-top: 30px;
+    }
+
+    .buy-now a {
+      background-color: #28a745;
+      color: white;
+      padding: 12px 24px;
+      font-size: 18px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .buy-now a:hover {
+      background-color: #218838;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>🔧 Add Product Details</h2>
 
-    <label>Select Category</label>
-    <select id="category">
-      <option value="">-- Select Category --</option>
-      <option value="Electronics">Electronics</option>
-      <option value="Other Products">Other Products</option>
-    </select>
-
-    <label>Enter Product Name</label>
-    <input type="text" id="productName" placeholder="Exact product name" />
-
-    <button onclick="findProduct()">🔍 Find Product</button>
-
-    <div id="productInfo" style="display:none; margin-top: 30px;">
-      <h3 id="prodName"></h3>
-      <img id="mainImage" class="preview-img" alt="Main Image">
-      <p><strong>Price:</strong> ₹<span id="prodPrice"></span></p>
-
-      <label>Add 3 More Images</label>
-      <input type="file" id="moreImages" accept="image/*" multiple>
-
-      <label>New Stock</label>
-      <input type="number" id="stock">
-
-      <label>New Price</label>
-      <input type="number" id="price">
-
-      <label>Product Description</label>
-      <textarea id="description" rows="5"></textarea>
-
-      <button onclick="updateProduct()">✅ Save Changes</button>
-    </div>
+  <div class="container" id="productDetails">
+    <!-- Dynamic Product Content Loads Here -->
   </div>
 
   <script>
-    let selectedProduct = null;
-    let selectedCategory = "";
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
 
-    function findProduct() {
-      const name = document.getElementById("productName").value.trim();
-      selectedCategory = document.getElementById("category").value;
-      const data = JSON.parse(localStorage.getItem(selectedCategory)) || [];
+    if (!product) {
+      document.getElementById("productDetails").innerHTML = "<h2>No product found!</h2>";
+    } else {
+      const container = document.getElementById("productDetails");
+      const mainImage = product.images[0] || "";
+      const imageList = product.images.slice(0, 3).map(img => `<img src="${img}" onclick="document.getElementById('mainImg').src='${img}'" alt="Product">`).join("");
 
-      const found = data.find(p => p.name === name);
-      if (found) {
-        selectedProduct = found;
-        document.getElementById("prodName").textContent = found.name;
-        document.getElementById("prodPrice").textContent = found.price;
-        document.getElementById("mainImage").src = found.images[0] || "";
-        document.getElementById("productInfo").style.display = "block";
-      } else {
-        alert("❌ Product not found in selected category.");
-        document.getElementById("productInfo").style.display = "none";
-      }
-    }
+      container.innerHTML = `
+        <div class="main-image">
+          <img id="mainImg" src="${mainImage}" alt="${product.name}">
+        </div>
 
-    function updateProduct() {
-      const stock = document.getElementById("stock").value;
-      const price = document.getElementById("price").value;
-      const description = document.getElementById("description").value;
-      const moreImages = document.getElementById("moreImages").files;
+        <div class="other-images">${imageList}</div>
 
-      const readerPromises = Array.from(moreImages).slice(0, 3).map(file => {
-        return new Promise(resolve => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result);
-          reader.readAsDataURL(file);
-        });
-      });
+        <div class="details">
+          <h2>${product.name}</h2>
+          <p><strong>Price:</strong> ₹${product.price}</p>
+          <p><strong>Stock:</strong> ${product.stock}</p>
+          <p><strong>Category:</strong> ${product.category}</p>
+          <p><strong>Description:</strong> ${product.description}</p>
+        </div>
 
-      Promise.all(readerPromises).then(images => {
-        if (stock) selectedProduct.stock = stock;
-        if (price) selectedProduct.price = price;
-        if (description) selectedProduct.description = description;
-        if (!selectedProduct.images) selectedProduct.images = [];
-        selectedProduct.images = [...selectedProduct.images, ...images];
-
-        // Update LocalStorage
-        const products = JSON.parse(localStorage.getItem(selectedCategory)) || [];
-        const index = products.findIndex(p => p.name === selectedProduct.name);
-        if (index !== -1) {
-          products[index] = selectedProduct;
-          localStorage.setItem(selectedCategory, JSON.stringify(products));
-          alert("✅ Product details updated successfully.");
-        }
-      });
+        <div class="buy-now">
+          <a href="buy-now.html" target="_blank">🛒 Buy Now</a>
+        </div>
+      `;
     }
   </script>
+
 </body>
 </html>
